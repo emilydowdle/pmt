@@ -16,9 +16,13 @@ gem 'responders'
 
 # gem 'bcrypt', '~> 3.1.7'
 
+# For PagerDuty
+gem 'pager_duty-connection'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'mocha'
   gem 'pry'
   gem 'capybara'
   gem 'launchy'
@@ -32,4 +36,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'pry'
 end
