@@ -4,6 +4,11 @@
 }
 
 /* nav */
+.logo-icon {
+  float: left;
+  max-width: 50px;
+  margin: 10px;
+}
 .nav-link a {
   background: none;
   color: #333;
@@ -24,6 +29,8 @@
   color: #25C151;
 }
 .logo {
+  float: left;
+  margin: 4px 3px;
   color: #333;
   font-weight: 600;
 }
