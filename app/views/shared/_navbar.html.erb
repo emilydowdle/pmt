@@ -1,12 +1,12 @@
 <nav id="primary-nav">
-  <div class="nav-wrapper">
-    <a href="/" class="brand-logo">PMT</a>
+  <div class="nav-wrapper background-white">
+    <a href="/" class="brand-logo left-margin-15"><span class="logo">blkbox</span></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if current_user %>
-        Signed in as <strong><%= current_user.name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
+        <li class="nav-link"><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
       <% else %>
-        <%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+        <li class="nav-link"><%= link_to "Sign in", signout_path, id: "sign_out" %></li>
+        <li><a id="sign_in" href="/auth/google_oauth2" class="waves-effect waves-light btn background-green">Sign up</a></li>
       <% end %>
     </ul>
   </div>

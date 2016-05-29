@@ -9,8 +9,10 @@
   <body>
     <%= render partial: 'shared/navbar' %>
 
-    <div>
-    <%= yield %>
+    <div class="container main">
+      <%= yield %>
     </div>
+
+    <%= render partial: 'shared/footer' %>
   </body>
 </html>

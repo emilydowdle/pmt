@@ -1,0 +1,40 @@
+/* page */
+.main {
+  min-height: 400px;
+}
+
+/* nav */
+.nav-link a {
+  background: none;
+  color: #333;
+  margin: 0 15px 15px 15px;
+  text-transform: capitalize;
+}
+
+/* footer */
+.page-footer {
+  background-color: #292929 !important;
+}
+.footer-copyright {
+  background-color: #404040 !important;
+}
+
+/* color */
+.pg-green {
+  color: #25C151;
+}
+.logo {
+  color: #333;
+  font-weight: 600;
+}
+.background-green {
+  background-color: #25C151 !important;
+}
+.background-white {
+  background-color: #fff;
+}
+
+/* margin */
+.left-margin-15 {
+  margin-left: 15px;
+}
