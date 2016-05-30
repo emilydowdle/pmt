@@ -27,7 +27,9 @@
           <img width=40 src="<%= log_entry.user.avatar_url%>"/> <br>
           <span><%= log_entry.user.name + " ( " + log_entry.user.email + ")"%></span>
         </td>
-        <td><%= log_entry.content %></td>
+        <td>
+          <%= log_entry.content %>
+        </td>
       </tr>
     <% end %>
   </tbody>

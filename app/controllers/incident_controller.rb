@@ -20,19 +20,25 @@ class IncidentController < ApplicationController
   def normalize_log_entries( log_entries )
     log_entries.map do |log|
       case log.type
-      when 'notify'
-        log.user = log.user
       when 'assign'
         log.user = log.assigned_user
+      when 'notify'
+        log.user = {name: '', email: log.notification.address, avatar_url: ''}
       else
-        log.user = log.agent
+        if !log.agent.nil? && log.agent.type == 'user'
+          log.user = log.agent 
+        elsif 
+          log.user = {name: 'todo: find name', email: '', avatar_url: ''}
+          puts log
+        end
       end
-      log 
+      log
     end
   end
-  
+
   def combine_logs_and_notes( log_entries, notes )
     combined = log_entries.concat notes
+    combined.compact!
     combined.sort_by{ |h| h.created_at }
   end
 end
