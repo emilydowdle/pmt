@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PMT</title>
+    <title>blkbox</title>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= csrf_meta_tags %>
   </head>
   <body>
+
     <%= render partial: 'shared/navbar' %>
+
+    <% if flash[:success] %>
+      <div id="nav-bar" class="success-alert alert white-text">
+        <p class="flow-text container"><%= raw(flash[:success]) %></p>
+      </div>
+    <% elsif flash[:error] %>
+      <div id="nav-bar" class="error-alert alert white-text">
+        <% flash.each do |type, message| %>
+          <p class="flow-text container"><%= content_tag(:div, message) %></p>
+        <% end %>
+      </div>
+    <% end %>
 
     <div class="container main">
       <%= yield %>

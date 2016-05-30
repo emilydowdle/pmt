@@ -15,6 +15,14 @@
   margin: 0 15px 15px 15px;
   text-transform: capitalize;
 }
+.success-alert {
+  min-height: 30px;
+  background-color: #25C151;
+}
+.error-alert {
+  min-height: 30px;
+  background-color: red;
+}
 
 /* footer */
 .page-footer {
