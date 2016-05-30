@@ -26,8 +26,8 @@ class IncidentController < ApplicationController
         log.user = {name: '', email: log.notification.address, avatar_url: ''}
       else
         if !log.agent.nil? && log.agent.type == 'user'
-          log.user = log.agent 
-        elsif 
+          log.user = log.agent
+        elsif
           log.user = {name: 'todo: find name', email: '', avatar_url: ''}
           puts log
         end
