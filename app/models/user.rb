@@ -18,4 +18,12 @@ class User < ActiveRecord::Base
       user.save!
     end
   end
+
+  def organization_count
+    organizations.count
+  end
+
+  def has_zero_organizations?
+    organization_count == 0
+  end
 end

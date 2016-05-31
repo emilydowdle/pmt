@@ -34,9 +34,11 @@ ActiveRecord::Schema.define(version: 20160530202049) do
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
     t.string   "encrypted_pagerduty_account"
+    t.string   "encrypted_pagerduty_account_iv"
     t.string   "encrypted_pagerduty_token"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "encrypted_pagerduty_token_iv"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "users", force: :cascade do |t|

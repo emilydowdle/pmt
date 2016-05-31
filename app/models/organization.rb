@@ -1,8 +1,8 @@
 class Organization < ActiveRecord::Base
-  include Encryption
+  extend AttrEncrypted
 
-  attr_encrypted :pagerduty_account, key: :encryption_key
-  attr_encrypted :pagerduty_token, key: :encryption_key
+  attr_encrypted :pagerduty_account, key: ENV['ENCRYPTION_KEY'], encode: true
+  attr_encrypted :pagerduty_token, key: ENV['ENCRYPTION_KEY'], encode: true
 
   has_many :organization_users
   has_many :users, through: :organization_users
