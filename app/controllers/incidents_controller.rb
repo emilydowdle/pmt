@@ -1,4 +1,4 @@
-class IncidentController < ApplicationController
+class IncidentsController < ApplicationController
 
   def index
     @incidents = service.get_incidents
