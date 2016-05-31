@@ -1,4 +1,5 @@
 class IncidentsController < ApplicationController
+  before_action :require_org_membership
 
   def index
     @incidents = service.get_incidents
@@ -47,5 +48,13 @@ class IncidentsController < ApplicationController
 
   def get_current_org
     Organization.find_by(slug: params[:organization_slug])
+  end
+
+  def require_org_membership
+    organization = get_current_org
+    if organization.nil? 
+      return false
+    end
+    organization.users.find( current_user )
   end
 end
