@@ -1,4 +1,5 @@
 class IncidentsController < ApplicationController
+  before_action :require_org_membership
 
   def index
     @incidents = service.get_incidents
@@ -14,7 +15,8 @@ class IncidentsController < ApplicationController
   private
 
   def service
-    @service ||= IncidentManagementService.new(ENV['PAGERDUTY_ACCOUNT'], ENV['PAGERDUTY_TOKEN'])
+    org = get_current_org
+    @service ||= IncidentManagementService.new(org.pagerduty_account, org.pagerduty_token)
   end
 
   def normalize_log_entries( log_entries )
@@ -40,5 +42,19 @@ class IncidentsController < ApplicationController
     combined = log_entries.concat notes
     combined.compact!
     combined.sort_by{ |h| h.created_at }
+  end
+
+  private
+
+  def get_current_org
+    Organization.find_by(slug: params[:organization_slug])
+  end
+
+  def require_org_membership
+    organization = get_current_org
+    if organization.nil? 
+      return false
+    end
+    organization.users.find( current_user )
   end
 end

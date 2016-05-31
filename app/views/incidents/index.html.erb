@@ -1,6 +1,6 @@
 <ol>
   <% @incidents.each do |incident| %>
-  <li><%= link_to incident.trigger_summary_data.subject , incident_path(incident.id) %>
+  <li><%= link_to incident.trigger_summary_data.subject , organization_incident_path(id: incident.id) %>
   <ul>
     <li><%= incident.incident_number %> | <a href="<%= incident.html_url%>"><%= incident.html_url%></a></li>
     <li><%= incident.status%> at <%= incident.last_status_change_on %></li>

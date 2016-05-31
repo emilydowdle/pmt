@@ -1,4 +1,6 @@
 class OrganizationsController < ApplicationController
+  before_action :require_membership, except: [:new]
+  
   def new
     @organization = current_user.organizations.new
   end
@@ -27,5 +29,11 @@ class OrganizationsController < ApplicationController
 
   def organization_params
     params.require(:organization).permit(:name, :pagerduty_account, :pagerduty_token, :slug)
+  end
+
+  def require_membership
+    organization = Organization.find_by(slug: params[:slug])
+    matches = organization.users.find( current_user )
+    matches
   end
 end
