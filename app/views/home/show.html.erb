@@ -9,16 +9,18 @@
   <table>
     <thead>
       <tr>
-          <th data-field="organization-name">Organization Name</th>
-          <th data-field="organization-link"></th>
+          <% if current_user.has_more_than_one_org? %>
+            <th data-field="organization-name">Organizations</th>
+          <% else %>
+            <th data-field="organization-name">Organization</th>
+          <% end %>
       </tr>
     </thead>
 
     <tbody>
       <% current_user.organizations.each do |org| %>
         <tr>
-          <td><%= org.name %></td>
-          <td>Put a button here</td>
+          <td><%= link_to org.name, organization_path(slug: org.slug) %></td>
         </tr>
       <% end %>
     </tbody>

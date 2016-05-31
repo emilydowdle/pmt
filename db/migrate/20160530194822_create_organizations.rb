@@ -6,6 +6,7 @@ class CreateOrganizations < ActiveRecord::Migration
       t.string :encrypted_pagerduty_account_iv
       t.string :encrypted_pagerduty_token
       t.string :encrypted_pagerduty_token_iv
+      t.string :slug
       t.timestamps null: false
     end
   end

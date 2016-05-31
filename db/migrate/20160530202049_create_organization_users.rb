@@ -3,6 +3,7 @@ class CreateOrganizationUsers < ActiveRecord::Migration
     create_table :organization_users do |t|
       t.belongs_to :user, index: true
       t.belongs_to :organization, index: true
+      t.integer :user_role
       t.timestamps null: false
     end
   end

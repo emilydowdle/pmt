@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create, :destroy]
   resources :home, only: [:show]
-  resources :organizations, only: [:new, :create, :show, :edit]
+  resources :organizations, only: [:new, :create, :show, :edit], param: :slug
   resources :incident
 
   root to: "home#show"

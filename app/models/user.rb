@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
   def has_zero_organizations?
     organization_count == 0
   end
+
+  def has_more_than_one_org?
+    organization_count > 1
+  end
 end

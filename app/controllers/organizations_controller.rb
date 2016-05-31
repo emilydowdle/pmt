@@ -5,6 +5,7 @@ class OrganizationsController < ApplicationController
 
   def create
     @organization = current_user.organizations.new(organization_params)
+    @organization.slug = @organization.name.parameterize
     if @organization.save
       current_user.organizations << @organization
       flash[:success] = "#{@organization.name} has been created."
@@ -19,12 +20,12 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-
+    @organization = Organization.find_by(slug: params[:slug])
   end
 
   private
 
   def organization_params
-    params.require(:organization).permit(:name, :pagerduty_account, :pagerduty_token)
+    params.require(:organization).permit(:name, :pagerduty_account, :pagerduty_token, :slug)
   end
 end

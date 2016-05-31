@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160530202049) do
   create_table "organization_users", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
+    t.integer  "user_role"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 20160530202049) do
     t.string   "encrypted_pagerduty_account_iv"
     t.string   "encrypted_pagerduty_token"
     t.string   "encrypted_pagerduty_token_iv"
+    t.string   "slug"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
   end
