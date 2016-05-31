@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
       user.last_name = auth.info.last_name
       user.email = auth.info.email
       user.image_url = auth.info.image
-      user.google_plus_url = auth.info.urls['Google']
+      user.google_plus_url = auth.info.urls['Google'] unless auth.info.urls.nil?
       user.gender = auth.extra.raw_info.gender
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)

@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
-  before_action :require_membership
-
+  before_action :require_membership, except: [:new]
+  
   def new
     @organization = current_user.organizations.new
   end
@@ -33,7 +33,7 @@ class OrganizationsController < ApplicationController
 
   def require_membership
     organization = Organization.find_by(slug: params[:slug])
-    binding.pry
-    organization.users.contains( current_user )
+    matches = organization.users.find( current_user )
+    matches
   end
 end
