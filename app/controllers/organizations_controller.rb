@@ -1,12 +1,12 @@
 class OrganizationsController < ApplicationController
   def new
-    @organization = Organization.new
+    @organization = current_user.organizations.new
   end
 
   def create
-    @organization = Organization.new(organization_params)
-    # binding.pry
+    @organization = current_user.organizations.new(organization_params)
     if @organization.save
+      current_user.organizations << @organization
       flash[:success] = "#{@organization.name} has been created."
       redirect_to root_path
     else
