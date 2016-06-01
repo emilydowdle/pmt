@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
-  before_action :require_membership, except: [:new, :create]
+  include OrganizationSecurity
+  before_action OrganizationSecurity.require_membership, except: [:new, :create]
 
   def new
     @organization = current_user.organizations.new
@@ -29,15 +30,6 @@ class OrganizationsController < ApplicationController
 
   def organization_params
     params.require(:organization).permit(:name, :pagerduty_account, :pagerduty_token, :slug)
-  end
-
-  def require_membership
-    organization = Organization.find_by(slug: params[:slug])
-    matches = organization.users.find( current_user ) unless organization.nil?
-    if matches.nil? 
-      flash[:error] = "You cannot access that organization."
-      redirect_to root_path # halts request cycle
-    end
   end
 
 end

@@ -1,5 +1,8 @@
 class IncidentsController < ApplicationController
-  before_action :require_org_membership
+  include OrganizationSecurity
+  before_action do 
+    require_membership(params[:organization_slug], current_user)
+  end
 
   def index
     @incidents = service.get_incidents
