@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
-  before_action :require_membership, except: [:new]
-  
+  before_action :require_membership, except: [:new, :create]
+
   def new
     @organization = current_user.organizations.new
   end
@@ -33,7 +33,11 @@ class OrganizationsController < ApplicationController
 
   def require_membership
     organization = Organization.find_by(slug: params[:slug])
-    matches = organization.users.find( current_user )
-    matches
+    matches = organization.users.find( current_user ) unless organization.nil?
+    if matches.nil? 
+      flash[:error] = "You cannot access that organization."
+      redirect_to root_path # halts request cycle
+    end
   end
+
 end
