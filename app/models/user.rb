@@ -2,6 +2,18 @@ class User < ActiveRecord::Base
   has_many :organization_users
   has_many :organizations, through: :organization_users
 
+  before_create :confirmation_token
+
+  enum role: %w(default owner)
+
+  private
+
+  def confirmation_token
+    if self.confirm_token.blank?
+      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
+  end
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
@@ -15,7 +27,9 @@ class User < ActiveRecord::Base
       user.gender = auth.extra.raw_info.gender
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save!
+      if user.save!
+        UserMailer.registration_confirmation(user).deliver
+      end
     end
   end
 

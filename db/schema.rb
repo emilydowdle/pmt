@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530202049) do
+ActiveRecord::Schema.define(version: 20160601030232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 20160530202049) do
   create_table "organization_users", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
-    t.integer  "user_role"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "user_role",       default: 0
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "organization_users", ["organization_id"], name: "index_organization_users_on_organization_id", using: :btree
@@ -55,8 +55,10 @@ ActiveRecord::Schema.define(version: 20160530202049) do
     t.string   "gender"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "email_confirmed",  default: false
+    t.string   "confirm_token"
   end
 
 end
