@@ -1,6 +1,8 @@
 class OrganizationsController < ApplicationController
   include OrganizationSecurity
-  before_action OrganizationSecurity.require_membership, except: [:new, :create]
+  before_action except: [:new, :create] do
+    require_membership(params[:slug], current_user)
+  end
 
   def new
     @organization = current_user.organizations.new
