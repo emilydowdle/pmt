@@ -6,9 +6,19 @@
     </a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if current_user %>
-        <li class="nav-link"><a class="dropdown-button" href="#!" data-activates="dropdown1"><%= current_user.full_name %><i class="left-margin-0 material-icons right">arrow_drop_down</i></a></li>
-           <!-- <img src="images/yuna.jpg" alt="" class="circle responsive-img"> -->
-        <li class="nav-link"><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
+        <li class="nav-link">
+          <a class="dropdown-button" href="#!" data-activates="top-menu-dropdown">
+            <%= current_user.full_name %>
+            <i class="left-margin-0 material-icons right">arrow_drop_down</i>
+          </a>
+          <!-- Dropdown Structure -->
+          <ul id='top-menu-dropdown' class='dropdown-content'>
+            <li><%= link_to "Dashboard", '/'%></li>
+            <li class="divider"></li>
+            <li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
+          </ul>
+        </li>
+        <!-- <img src="images/yuna.jpg" alt="" class="circle responsive-img"> -->
       <% else %>
         <li class="nav-link"><%= link_to "Sign in", signout_path, id: "sign_out" %></li>
         <li><a id="sign_in" href="/auth/google_oauth2" class="waves-effect waves-light btn background-green">Sign up</a></li>
