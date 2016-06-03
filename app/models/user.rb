@@ -4,7 +4,22 @@ class User < ActiveRecord::Base
 
   before_create :confirmation_token
 
-  enum role: %w(default owner)
+  def has_zero_organizations?
+    organization_count == 0
+  end
+
+  def organization_count
+    organizations.count
+  end
+
+  def has_more_than_one_org?
+    organization_count > 1
+  end
+  
+  def org_owner?(slug)
+    organization = Organization.find_by(slug: slug)
+    organization_users.find(organization).owner?
+  end
 
   private
 
@@ -32,15 +47,4 @@ class User < ActiveRecord::Base
     end
   end
 
-  def organization_count
-    organizations.count
-  end
-
-  def has_zero_organizations?
-    organization_count == 0
-  end
-
-  def has_more_than_one_org?
-    organization_count > 1
-  end
 end
