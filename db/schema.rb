@@ -11,15 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601042910) do
+ActiveRecord::Schema.define(version: 20160604023331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "incidents", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "blackboxes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
+
+  add_index "blackboxes", ["organization_id"], name: "index_blackboxes_on_organization_id", using: :btree
+
+  create_table "incident_logs", force: :cascade do |t|
+    t.string   "action"
+    t.integer  "incident_id"
+    t.boolean  "is_starred"
+    t.boolean  "is_archived"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "incident_logs", ["incident_id"], name: "index_incident_logs_on_incident_id", using: :btree
+
+  create_table "incidents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "blackbox_id"
+    t.boolean  "is_archived"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "reference_id", null: false
+  end
+
+  add_index "incidents", ["blackbox_id"], name: "index_incidents_on_blackbox_id", using: :btree
 
   create_table "organization_users", force: :cascade do |t|
     t.integer  "user_id"
@@ -46,8 +73,9 @@ ActiveRecord::Schema.define(version: 20160601042910) do
   create_table "pager_duty_webhook_events", force: :cascade do |t|
     t.string   "ip"
     t.jsonb    "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "is_processed", default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,4 +94,7 @@ ActiveRecord::Schema.define(version: 20160601042910) do
     t.datetime "updated_at",       null: false
   end
 
+  add_foreign_key "blackboxes", "organizations"
+  add_foreign_key "incident_logs", "incidents"
+  add_foreign_key "incidents", "blackboxes"
 end
