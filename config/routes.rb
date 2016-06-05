@@ -6,14 +6,17 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create, :destroy]
   resources :home, only: [:show]
-  resources :organizations, only: [:new, :create, :show, :edit], param: :slug do
+
+  resources :organizations, param: :slug do
     resources :incidents
+    resources :users, only: [:new, :create]
   end
-  resources :users do
-    member do
-      get :confirm_email
-    end
-  end
+  # resources :users do
+  #   member do
+  #     get :confirm_email
+  #   end
+  # end
+  # get 'organizations/:slug/users/new', to: 'users#new'
 
   root to: "home#show"
 end
