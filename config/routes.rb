@@ -9,14 +9,14 @@ Rails.application.routes.draw do
 
   resources :organizations, param: :slug do
     resources :incidents
-    resources :users, only: [:new, :create]
+    resources :users, only: [:new, :create, :show] do
+      member do
+        get :add_existing_user
+        post :confirm_add
+        get :confirm_email
+      end
+    end
   end
-  # resources :users do
-  #   member do
-  #     get :confirm_email
-  #   end
-  # end
-  # get 'organizations/:slug/users/new', to: 'users#new'
 
   root to: "home#show"
 end

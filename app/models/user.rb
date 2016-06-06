@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_many :organization_users
   has_many :organizations, through: :organization_users
 
+  validates :email, format: /@/
+
   before_create :confirmation_token
 
   def has_zero_organizations?
@@ -15,7 +17,7 @@ class User < ActiveRecord::Base
   def has_more_than_one_org?
     organization_count > 1
   end
-  
+
   def org_owner?(slug)
     organization = Organization.find_by(slug: slug)
     organization_users.find(organization).owner?
@@ -27,6 +29,12 @@ class User < ActiveRecord::Base
     if self.confirm_token.blank?
       self.confirm_token = SecureRandom.urlsafe_base64.to_s
     end
+  end
+
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(:validate => false)
   end
 
   def self.from_omniauth(auth)
