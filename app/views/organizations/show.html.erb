@@ -23,9 +23,9 @@
       <tbody>
         <% @blackboxes.each do |bb| %>
           <tr>
-            <td><%= link_to bb.name, organization_incident_path( bb.organization.slug, bb.id ) %></td>
-            <td><%= bb.created_at.strftime("%Y-%m-%d %H:%M:%S %Z") %></td>
-            <td><%= bb.updated_at.strftime("%Y-%m-%d %H:%M:%S %Z")  %></td>
+            <td><%= link_to bb.name, organization_blackbox_path( bb.organization.slug, bb.id ) %></td>
+            <td><%= bb.created_at %></td>
+            <td><%= bb.updated_at %></td>
           </tr>
         <% end %>
       </tbody>

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :home, only: [:show]
 
   resources :organizations, param: :slug do
-    resources :incidents
+    resources :blackboxes
     resources :users, only: [:new, :create, :show] do
       member do
         get :add_existing_user
