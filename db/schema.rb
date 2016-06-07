@@ -100,8 +100,8 @@ ActiveRecord::Schema.define(version: 20160605022927) do
     t.string   "gender"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.boolean  "email_confirmed",  default: false
     t.string   "confirm_token"
   end
