@@ -1,0 +1,9 @@
+<h3>Existing User</h3>
+<p>
+  The email you entered, <%= @user.email %>, belongs to an existing account.
+</p>
+<p>
+  If you'd like to add <%= @user.first_name || "this user" %> to <%= @organization.name %>, click the button below.
+</p>
+
+<%= button_to "Add #{@user.first_name || "this user"} to #{@organization.name || "your organization"}", confirm_add_organization_user_path(@organization, @user), class: "right background-green waves-effect waves-light btn" %>

@@ -13,6 +13,7 @@ class OrganizationsController < ApplicationController
     @organization.slug = @organization.name.parameterize
     if @organization.save
       current_user.organizations << @organization
+      current_user.organization_users.find(@organization).update!(user_role: 1)
       flash[:success] = "#{@organization.name} has been created."
       redirect_to root_path
     else

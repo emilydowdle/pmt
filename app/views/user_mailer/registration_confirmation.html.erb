@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>
+      Hi <%= @user.first_name %>,
+    </p>
+    <p>
+      You've been added to <%= @organization.name %> at blkbox. To confirm your account, click the link below.
+    </p>
+
+    <%= confirm_email_organization_user_url(@organization, @user.confirm_token) %>
+  </body>
+</html>

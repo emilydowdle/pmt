@@ -1,6 +1,7 @@
 /* page */
 .main {
-  min-height: 400px;
+  min-height: 500px;
+  margin-bottom: 50px !important;
 }
 .page-title {
   margin: 50px 0 20px 0;
