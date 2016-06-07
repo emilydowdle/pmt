@@ -2,12 +2,8 @@
 
 one:
   name: MyString
-  description: MyString
-  blackbox_id: 
-  is_archived: false
+  organization_id: 
 
 two:
   name: MyString
-  description: MyString
-  blackbox_id: 
-  is_archived: false
+  organization_id: 

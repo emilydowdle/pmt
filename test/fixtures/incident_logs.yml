@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyString
-  blackbox_id: 
+  action: MyString
+  incident_id: 
+  is_starred: false
   is_archived: false
 
 two:
-  name: MyString
-  description: MyString
-  blackbox_id: 
+  action: MyString
+  incident_id: 
+  is_starred: false
   is_archived: false
