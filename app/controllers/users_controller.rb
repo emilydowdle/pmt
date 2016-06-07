@@ -40,16 +40,15 @@ class UsersController < ApplicationController
   end
 
   def confirm_email
-    binding.pry
     user = User.find_by_confirm_token(params[:id])
     if user
       user.email_activate
       flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
       Please sign in with Google to continue."
-      redirect_to signin_url
+      redirect_to root_path 
     else
       flash[:error] = "Sorry, user does not exist."
-      redirect_to root_url
+      redirect_to root_path 
     end
   end
 

@@ -23,18 +23,18 @@ class User < ActiveRecord::Base
     organization_users.find(organization).owner?
   end
 
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(:validate => false)
+  end
+
   private
 
   def confirmation_token
     if self.confirm_token.blank?
       self.confirm_token = SecureRandom.urlsafe_base64.to_s
     end
-  end
-
-  def email_activate
-    self.email_confirmed = true
-    self.confirm_token = nil
-    save!(:validate => false)
   end
 
   def self.from_omniauth(auth)
