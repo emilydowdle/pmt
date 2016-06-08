@@ -27,6 +27,7 @@ class OrganizationsController < ApplicationController
 
   def show
     @organization = Organization.find_by(slug: params[:slug])
+    @blackboxes = @organization.blackboxes
   end
 
   private

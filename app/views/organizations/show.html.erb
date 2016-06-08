@@ -1,10 +1,44 @@
-<h3 class="page-title"><%= @organization.name %> Dashboard</h3>
+<nav class="org z-depth-0">
+  <div class="nav-wrapper">
+    <div class="col s12 white">
+      <%= link_to "Orgs", root_path, :class=>"breadcrumb" %>
+      <%= link_to @organization.name, organization_path, :class=>"breadcrumb" %>
+    </div>
+  </div>
+</nav>
 
-<% if owner? %>
-  <p>
-    It doesn't look like you're a member of any organizations. <b>I'll walk you through how to start using blkbox.</b>
-  </p>
-  <%= button_to "Add a User", new_organization_user_path(organization_slug: @organization.slug), method: :get, class: "background-green waves-effect waves-light btn" %>
-<% else %>
-  stuff should go here for none owners
-<% end %>
+<%# <h2 class="page-title"><%= @organization.name %1> Dashboard</h2> %>
+<div class="row">
+  <div class="col s8">
+    <h3>BlkBoxes</h3>
+    <table>
+      <thead>
+        <tr>
+          <th data-field="id">Name</th>
+          <th data-field="start-at">Started At</th>
+          <th data-field="update-at">Updated At</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @blackboxes.each do |bb| %>
+          <tr>
+            <td><%= link_to bb.name, organization_incident_path( bb.organization.slug, bb.id ) %></td>
+            <td><%= bb.created_at %></td>
+            <td><%= bb.updated_at %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col s4">
+    <% if owner? %>
+      <p>
+      It sure is lonely in here. Invite some team members. <b>I'll walk you through how to start using blkbox.</b>
+      </p>
+      <%= button_to "Add a User", new_organization_user_path(organization_slug: @organization.slug), method: :get, class: "background-green waves-effect waves-light btn" %>
+    <% else %>
+      stuff should go here for none owners
+    <% end %>
+  </div>
+</div>
