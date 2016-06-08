@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   has_many :organization_users
   has_many :organizations, through: :organization_users
 
-  validates :email, format: /@/
+  validates :email, format: /@/,
+                    presence: true
 
   before_create :confirmation_token
 
