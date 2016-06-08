@@ -15,8 +15,8 @@
       <thead>
         <tr>
           <th data-field="id">Name</th>
-          <th data-field="start-at">Started At</th>
-          <th data-field="update-at">Updated At</th>
+          <th data-field="start-at">Started</th>
+          <th data-field="update-at">Updated</th>
         </tr>
       </thead>
 
@@ -24,8 +24,8 @@
         <% @blackboxes.each do |bb| %>
           <tr>
             <td><%= link_to bb.name, organization_incident_path( bb.organization.slug, bb.id ) %></td>
-            <td><%= bb.created_at %></td>
-            <td><%= bb.updated_at %></td>
+            <td><%= bb.created_at.strftime("%Y-%m-%d %H:%M:%S %Z") %></td>
+            <td><%= bb.updated_at.strftime("%Y-%m-%d %H:%M:%S %Z")  %></td>
           </tr>
         <% end %>
       </tbody>
