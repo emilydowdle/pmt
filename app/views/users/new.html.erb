@@ -1,5 +1,6 @@
 <h3 class="page-title">New User for <%= @organization.name %></h3>
 <%= form_for @user, url: organization_users_path(@organization) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="form-group">
     <%= f.label :email %>
     <%= f.text_field :email %>
