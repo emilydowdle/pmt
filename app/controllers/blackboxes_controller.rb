@@ -1,15 +1,15 @@
-class IncidentsController < ApplicationController
+class BlackboxesController < ApplicationController
   include OrganizationSecurity
   before_action do 
     require_membership(params[:organization_slug], current_user)
   end
-
+  
   def index
     @incidents = service.get_incidents
   end
 
   def show
-    @incident = Incident.find(params[:id])
+    @blackbox = Blackbox.find(params[:id])
  end
 
   private
@@ -57,4 +57,5 @@ class IncidentsController < ApplicationController
     end
     organization.users.find( current_user )
   end
+
 end

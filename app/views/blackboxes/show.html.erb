@@ -1,0 +1,34 @@
+<nav class="org z-depth-0">
+  <div class="nav-wrapper">
+    <div class="col s12 white">
+      <%= link_to "Orgs", root_path, :class=>"breadcrumb" %>
+      <%= link_to @blackbox.organization.name, organization_path(@blackbox.organization.slug), :class=>"breadcrumb" %>
+      <a class="breadcrumb"><%= @blackbox.name %></a>
+    </div>
+  </div>
+</nav>
+
+<h3>Users Involved</h3>
+<!-- Involved Users-->
+<% @blackbox.involved_users.each do |usr| %>
+  <div class="chip"><a href="mailto:<%= usr.email %>"><%= usr.full_name %></a></div>
+<% end %>
+
+<h3>Incident Log</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Date/Time</th>
+      <th>Action</th>
+      <th>Actor</th>
+  </thead>
+  <tbody>
+    <% @blackbox.incidents.first.incident_logs.each do |log| %>
+      <tr>
+        <td><%= log.created_at %></td>
+        <td><%= log.action.capitalize %></td>
+        <td>TODO: Add</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
