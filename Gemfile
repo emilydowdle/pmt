@@ -15,6 +15,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "attr_encrypted", "~> 3.0.0"
 gem 'responders'
 gem "nokogiri", ">= 1.10.4"
+gem "activerecord", ">= 4.2.7.1"
 
 
 # gem 'bcrypt', '~> 3.1.7'
