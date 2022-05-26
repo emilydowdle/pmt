@@ -1,5 +1,6 @@
 <h3 class="page-title">Create Organization</h3>
 <%= form_for @organization, url: organizations_path do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="form-group">
     <%= f.label :name %>
     <%= f.text_field :name %>

@@ -7,10 +7,13 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @organization = Organization.find_by(slug: params[:organization_slug]) || Organization.find(params[:organization_slug])
-    if User.exists?(email: user_params[:email])
+    if email_address_same_as_current_user?(@user.email)
+      flash[:error] = "Oops, you entered your email address."
+      render :new
+    elsif User.exists?(email: user_params[:email])
       @user = User.find_by(email: user_params[:email])
       redirect_to add_existing_user_organization_user_path(@user, organization_id: @organization.id, organization_slug: @organization.slug)
-    elsif @user.save
+    elsif @user != current_user && @user.save
       UserMailer.registration_confirmation(@user, @organization).deliver
       @organization.users << @user
       flash[:success] = "An invitation has been sent to #{@user.email}"
@@ -45,10 +48,10 @@ class UsersController < ApplicationController
       user.email_activate
       flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
       Please sign in with Google to continue."
-      redirect_to root_path 
+      redirect_to root_path
     else
       flash[:error] = "Sorry, user does not exist."
-      redirect_to root_path 
+      redirect_to root_path
     end
   end
 
@@ -56,5 +59,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email)
+  end
+
+  def email_address_same_as_current_user?(email)
+    email == current_user.email
   end
 end
